@@ -19,3 +19,14 @@ https://www.codechef.com/status/SALARY,tcmandan
 
 **Link to work:** 
 Project 1: React + Node (Visualisation Project) Target 20 June 2020
+
+
+
+#### Day 2: June 15 2020
+
+**Today's Progress**: Did LC daily challenge, revising HTML and CSS, started work on chat application.  
+
+**Thoughts:** Had to change the initial idea of a visualisation project, as a startup required knowledge to build a chat app.
+
+**Link to work:** 
+git@github.com:teekamchandmandan/papdi-chat.git
