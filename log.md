@@ -30,3 +30,12 @@ Project 1: React + Node (Visualisation Project) Target 20 June 2020
 
 **Link to work:** 
 git@github.com:teekamchandmandan/papdi-chat.git
+
+
+
+#### Day 2: June 16 2020
+
+**Today's Progress**: 3 LC questions, a rather odd bug made me work for hours. Finalized design and name of the application.
+Found a great article by @rwieruch explaining API for beginners. Do read. https://www.robinwieruch.de/what-is-an-api-javascript
+
+**Thoughts:** I hope some real coding work starts tomorrow.
