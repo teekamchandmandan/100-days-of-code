@@ -39,3 +39,11 @@ git@github.com:teekamchandmandan/papdi-chat.git
 Found a great article by @rwieruch explaining API for beginners. Do read. https://www.robinwieruch.de/what-is-an-api-javascript
 
 **Thoughts:** I hope some real coding work starts tomorrow.
+
+
+#### Day 4: June 17 2020
+
+**Today's Progress**: 5 questions on scalar platform and 3 on LC.
+Used a terminal component in React FE. 
+
+**Thoughts:**  Reuse your components and of others too!
