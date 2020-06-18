@@ -47,3 +47,10 @@ Found a great article by @rwieruch explaining API for beginners. Do read. https:
 Used a terminal component in React FE. 
 
 **Thoughts:**  Reuse your components and of others too!
+
+
+#### Day 5: June 18 2020
+
+**Today's Progress**: Interview given for openhouse. C++ program to check if a given string is a valid json or not. Some debugging required. 
+
+**Thoughts:**  Object oriented code structure to be followed. Also learn/pracise regex.
