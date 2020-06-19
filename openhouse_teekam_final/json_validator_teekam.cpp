@@ -1,13 +1,21 @@
 # include <iostream>
 # include <vector>
 # include <fstream>
+# include <unordered_set>
+
 using namespace std;
-bool checkJSON(string query);
+
+bool checkObject(string query);
 bool checkArray(string query);
+bool checkNumber(string query);
+bool checkString(string query);
+bool checkJSON(string query);
+void split(string query, vector<string> &parts);
 
 bool checkNumber(string query){
-    int decimalCount = 0;
-    for(int i=0; i<query.size();i++){
+    int i=0, decimalCount = 0;
+    if (query[0] == '-') i++; // negative numbers
+    for(; i<query.size();i++){
         if(query[i] == '.')
             decimalCount++;
         else if(query[i] <'0' || query[i] > '9')
@@ -28,30 +36,32 @@ bool checkString(string query){
                 return false;
     return true;
 }
-bool checkAllTypes(string line, int i){
 
+bool checkJSON(string query){
     // checks if a string contains JSON object, array, number, boolean or undefined. otherwise returns false.
-
-    if(line[i] == '{'){ // recursive call for any object.
-        if (!checkJSON(line.substr(i))){ 
+    if(query == "") return true;
+    if(query[0] == '{'){ //  for any object.
+        if (!checkObject(query)){ 
             return false;
         }
     }
-    else if(line[i] == '['){ // for array 
-        if(!checkArray(line.substr(i)))
+    else if(query[0] == '['){ // for array 
+        if(!checkArray(query)){
             return false;
+        }
     }
-    else if(line[i] == '"' || line[i] == '\''){ // check for string
-        if(!checkString(line.substr(i)))
+    else if(query[0] == '\"' || query[0] == '\''){ // check for string
+        if(!checkString(query)){
             return false;
+        }
     }
-    else if(line[i] >= '0' && line[i] <='9'){
-        if(!checkNumber(line.substr(i)))
+    else if((query[0] >= '0' && query[0] <='9') || (query[0] == '-')){
+        if(!checkNumber(query)){
             return false;
+        }
     }
     else{
-        string checkVariable = line.substr(i);
-        if(checkVariable == "undefined" || checkVariable == "null" || checkVariable == "true" || checkVariable == "false"){
+        if(query == "undefined" || query == "null" || query == "true" || query == "false"){
             return true;
         }
         return false;
@@ -60,19 +70,24 @@ bool checkAllTypes(string line, int i){
 }
 void split(string query, vector<string> &parts){
     int size = query.size(), prev=1;
+    if(size<=2) return;
     bool openBracket = false;
-    char quote;
-
+    char quoteOrBracket;
+    unordered_set<char> openingChars({'\'','\"','[',']','{','}'}); // to not split on , inside objects and arrays.
     for(int i = 1; i<size-1; i++){
-        if(query[i] == '\'' || query[i] == '\"'){  // ensuring that the split , is not in a string element.
+        if(openingChars.find(query[i]) != openingChars.end()){
             if(!openBracket){
                 openBracket = true;
-                quote = query[i];
+                quoteOrBracket = query[i];
             }
             else{
-                if(quote == query[i]){
+                if(quoteOrBracket == query[i]){
                     openBracket = false;
                 }
+                if(quoteOrBracket == '[' && query[i] == ']')
+                    openBracket = false;
+                if(quoteOrBracket == '{' && query[i] == '}')
+                    openBracket = false;
             }
         }
         if(query[i] == ',' && !openBracket){
@@ -80,8 +95,7 @@ void split(string query, vector<string> &parts){
             prev = i+1;
         }
     }
-    parts.push_back(query.substr(prev));
-
+    parts.push_back(query.substr(prev,size-1-prev));
 }
 
 bool checkArray(string query){
@@ -93,47 +107,52 @@ bool checkArray(string query){
     split(query, parts);
     
     for(auto line: parts){
-        if(checkAllTypes(line, 0) == false){
+        if(checkJSON(line) == false){
             return false;
         }
     }
   	return true;
 }
 
-
-bool checkJSON(string query){
+bool checkObject(string query){
   	int size = query.size(), prev=1;
   	vector<string> parts;
-  
   	if(query[0] !='{' || query[size-1] !='}') // base case
         return false;
-  
+    
     split(query, parts);
-
+    
     for(auto line : parts){
         int i = 1;
-        if(line[0] != '"')
+        if(line[0] != '\"' && line[0] != '\'')
             return false;
-        while(i<line.size() &&line[i] != '"') i++;
+        while(i<line.size() && line[i] != line[0]) i++;
         if(i == line.size()) return false;
-
+        i++;
         while(line[i] == ' ') i++; // ignoring any space
         if(line[i] != ':') return false;
+        i++;
         while(line[i] == ' ') i++;
-
-        if(checkAllTypes(line, i) == false){
+        
+        if(checkJSON(line.substr(i)) == false){
             return false;
         }
     }
     return true;
 	}
 int main(){
-    string testString = "{'x':[10,null,null,null]}";
-    if(checkJSON(testString)){
-        cout<<"Indeed a valid JSON";
-    }
-    else{
-        cout<<"Incorrect JSON";
+    ifstream cin("testJSON.txt");
+    string testString;
+
+    while(getline(cin,testString)){
+        if(testString == "")
+            break;
+        if(checkJSON(testString)){
+            cout<< testString << " Valid \n";
+        }
+        else{
+            cout<< testString << " Invalid\n";
+        }
     }
     return 0;
 }

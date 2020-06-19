@@ -1,0 +1,16 @@
+{'x':"a_variable"}
+{'decimal':5.5}
+{"level0" : {"level1" : {"level2" : [3,4,5]}}}
+{"mismatch_brackets":[{]}}
+"abcd"
+2
+[1,2,3,4]
+null
+true
+3.5
+abc"d
+"abcd"
+{}
+""
+fqefeq
+{"a": "b",}
