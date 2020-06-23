@@ -54,3 +54,29 @@ Used a terminal component in React FE.
 **Today's Progress**: Interview given for openhouse. C++ program to check if a given string is a valid json or not. Some debugging required. 
 
 **Thoughts:**  Object oriented code structure to be followed. Also learn/pracise regex.
+
+
+
+#### Day 6: June 19 2020
+
+
+**Today's Progress**: Researched on how to start contributing to open source projects.
+In the JSON validator, I had missed the usual base cases. Strings, booleans and other base types are JSON too. LC questions as usual.
+
+**Thoughts:**  Confused whether to buy a domain or use GitHub pages.
+
+
+
+#### Day 7: June 21 2020
+
+**Today's Progress**: I was not able to progress on Saturday, hence the challenge extended by a day. Decided to look at @freeCodeCamp courses, even though it seems I know much of it, doing it feels satisfying. Almost completed JavaScript and Basic Algorithms in 2 hours.
+
+**Thoughts:** Need to give more time to the project instead of relearning old things.
+
+
+#### Day 8: June 22 2020
+
+**Today's Progress**: Day 8: Continued progress on freeCodeCamp. Started learning system design parallely.
+
+**Thoughts:** I have lost count of on how many coding websites I have created my account.
+
